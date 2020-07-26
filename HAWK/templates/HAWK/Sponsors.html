@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+{%extends "HomePage/base.html"%}
+{% load static %}
+{%block content%}
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h1 style="text-align:center; color:#000000" > Our Sponsors </h1>
+    </head>
+    <body>
+    {% for Sponsorship_Package in Sponsorship_Packages %}
+    <div class="bordered">
+    <!--h1 style="text-align:center; color:Gray; padding: 5px 20px;"> {{Sponsorship_Package}} Sponsors </h1-->
+    <div class="container_center" style="width:80%;">
+        <div class="row">
+            {% for sponsor in Sponsors %}
+                {% if sponsor.Sponsorship_Package == Sponsorship_Package %}
+
+                        <div class="col-sm-4" style="text-align:center; padding: 5px 20px;">
+                            <img  class= "rounded-circle account-img"  src="{{sponsor.image.url}}" style="width:50%">
+                            <h2><a class="article-title" style="font-size:25px;" href="{% url 'HAWK-AboutSponsor' sponsor.team.car_number sponsor.id %}">{{ sponsor.name }}</a></h2>
+                            <div class="caption" >{{sponsor.about_Sponsor_in_short}}</div>
+                        </div>
+
+                  {% endif %}
+           {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    <br>
+    </body>
+    </html>
+{% endblock content%}

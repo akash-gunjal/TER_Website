@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+{%extends "HomePage/base.html"%}
+{% load static %}
+{%block content%}
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h1 style="text-align:center; font-family:verdana; color:#000000" >Team Hawk X</h1>
+    </head>
+    <body>
+        <div class="container_center">
+            <h1>Technical Highlights</h1>
+            <p> {{ object.technical_highlights }}</p>
+            <br>
+            <h1>Acheivements</h1>
+            <p>{{ object.acheivements }}</p>
+            <br>
+            <h1><a href="{% url 'HAWK-Team' object.car_number%}"> View Team Hawk {{object.car_number}} </a></h1>
+            <h1><a href="{% url 'HAWK-Sponsors' object.car_number%}"> Hawk {{object.car_number}} Sponsors </a></h1>
+        </div>
+    </body>
+    </html>
+{% endblock content%}

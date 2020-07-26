@@ -1,0 +1,73 @@
+
+{%extends "HomePage/base.html"%}
+{%block content%}
+    <div class="container-center" style="text-align:center; padding: 5px 20px;">
+         <h1 style="text-align:center; font-size:25px; font-family:verdana; color:#000000" > Transactions by {{ view.kwargs.username }} ({{page_obj.paginator.count}})</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Date
+        </div>
+        <div class="col-sm-1" style="text-align:center; padding: 5px 20px;">
+            Type
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Income Source
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Expenditure On
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Responsible Member
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Amount in Rs.
+        </div>
+        <div class="col-sm-1" style="text-align:center; padding: 5px 20px;">
+            Action
+        </div>
+    </div>
+    {% for transaction in transactions %}
+            <div class="row">
+                <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+                    {{ transaction.date_posted|date:"F d, Y" }}
+                </div>
+                <div class="col-sm-1" style="text-align:center; padding: 5px 20px;">
+                    {{ transaction.Type }}
+                </div>
+                <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+                    {{ transaction.Income_Source }}
+                </div>
+                <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+                    {{ transaction.Expenditure_on }}
+                </div>
+                <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+                    <a class="article-title"  href="{% url 'User-Transaction' transaction.responsible %}">{{ transaction.responsible }}</a>
+                </div>
+                <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+                    {{ transaction.Amount }}
+                </div>
+                <div class="col-sm-1" style="text-align:center; ">
+                    <a class= "btn btn-secondary btn-sm mt-0.25 mb-0.25" href="{% url 'Transaction-Detail' transaction.id%}""> View </a>
+                </div>
+            </div>
+    {% endfor %}
+    <br>
+    {% if is_paginated %}
+       {% if page_obj.has_previous %}
+           <a class ="btn btn-outline-info mb-4" href="?page=1">First</a>
+           <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_number }}">Previous</a>
+       {% endif %}
+       {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <a class ="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class ="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+       {% endfor %}
+       {%if page_obj.has_next %}
+           <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+           <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+       {% endif %}
+    {% endif %}
+{% endblock content %}

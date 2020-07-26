@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+{%extends "HomePage/base.html"%}
+{% load static %}
+{%block content%}
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h1 style="text-align:center; font-family:verdana; color:#000000" >Team Hawk X</h1>
+    </head>
+    <body>
+        {% for object in teams %}
+        <div>
+            <a href="{% url 'HAWK-Team_Info_Detail' object.id %}">Hawk {{object.car_number}}</a>
+            
+            <br>
+        </div>
+        {% endfor %}
+    </body>
+    </html>
+{% endblock content%}

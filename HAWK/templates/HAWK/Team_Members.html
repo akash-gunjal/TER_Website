@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+{%extends "HomePage/base.html"%}
+{% load static %}
+{%block content%}
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h1 style="text-align:center; font-family:verdana; color:#000000" >Team Hawk X</h1>
+    </head>
+    <body>
+    <div class="bordered" >
+        <h1 style="text-align:center; color:Gray; padding: 5px 20px; font-family:verdana;" > Incharge</h1>
+        <div class="container_center" style="font-family:verdana;">
+        <div class="row">
+        {% for position in incharge_members %}
+            {% for member in members %}
+                {% if member.Post_In_Team == position %}
+                    <div class="col-sm-4" style="text-align:center; padding: 10px 20px;">
+                        <img class="rounded-circle account-img" src="{{member.image.url}}" style="width:50%">
+                        <div class="article-title" style ="font-size:25px;">
+                            {{member.first_Name}} {{member.last_Name}}
+                        </div>
+                        <div class="caption" >
+                            {% if member.Post_In_Team in incharge_members  %}{{member.Post_In_Team}} {% endif %}
+                        </div>
+                        <div class="caption" >
+                            {{member.Post_In_Subsystem}} {{member.Subsystem}}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </div>
+        </div>
+    </div>
+
+
+    {% for subsystem in subsystems %}
+    <div class="bordered">
+    <h1 style="text-align:center; color:Gray; padding: 5px 20px; font-family:verdana;"> {{subsystem}}</h1>
+    <div class="container_center" style="width:80%;">
+        <div class="row">
+            {% for member in members %}
+                {% if member.Subsystem == subsystem %}
+                    <div class="col-sm-4" style="text-align:center; padding: 5px 20px;">
+                        <img class="rounded-circle account-img" src="{{member.image.url}}" style="width:50%">
+                        <div class="article-title" style ="font-size:25px;">
+                            {{member.first_Name}} {{member.last_Name}}
+                        </div>
+                        <div class="caption" >
+                            {% if member.Post_In_Team in incharge_members  %}{{member.Post_In_Team}} {% endif %}
+                        </div>
+                        <div class="caption" >
+                            {{member.Post_In_Subsystem}} {{member.Subsystem}}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    <br>
+    </body>
+    </html>
+{% endblock content%}

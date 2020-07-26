@@ -1,0 +1,57 @@
+{%extends "HomePage/base.html"%}
+{%block content%}
+
+    <div class="container-center" style="text-align:center; padding: 5px 20px;">
+         <h1 style="text-align:center; font-family:verdana; color:#000000" >Trasaction Details </h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Date
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Type
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Income Source
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Expenditure On
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Responsible Member
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            Amount in Rs.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            {{ object.date_posted|date:"F d, Y" }}
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            {{ object.Type }}
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            {{ object.Income_Source }}
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            {{ object.Expenditure_on }}
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            <a class="article-title"  href="{% url 'Transaction-Detail' object.id %}">{{ object.responsible }}</a>
+        </div>
+        <div class="col-sm-2" style="text-align:center; padding: 5px 20px;">
+            {{ object.Amount }}
+        </div>
+    </div>
+    <div class="article-metadata">
+
+     {%if object.responsible ==  user%}
+         <div class="container-center " style="text-align:center; padding: 5px 20px;">
+             <a class= "btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'Transaction-Update' object.id%}"">Update</a>
+             <a class= "btn btn-danger btn-sm mt-1 mb-1" href="{% url 'Transaction-Delete' object.id%}"">Delete</a>
+         </div>
+      {%endif%}
+    </div>
+{%endblock content%}
